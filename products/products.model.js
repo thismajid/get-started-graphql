@@ -15,4 +15,14 @@ const getAllProducts = () => {
   return products;
 };
 
-module.exports = { getAllProducts };
+const getProductsByPrice = (min, max) => {
+  return products.filter(
+    (product) => product.price >= min && product.price <= max
+  );
+};
+
+const getSingleProduct = (id) => {
+  return products.find((product) => product.id === id);
+};
+
+module.exports = { getAllProducts, getProductsByPrice, getSingleProduct };
