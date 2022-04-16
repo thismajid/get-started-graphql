@@ -1,4 +1,4 @@
-export default [
+const products = [
   {
     id: "redshoe",
     description: "Red Shoe",
@@ -10,3 +10,9 @@ export default [
     price: 55.55,
   },
 ];
+
+const getAllProducts = () => {
+  return products;
+};
+
+module.exports = { getAllProducts };

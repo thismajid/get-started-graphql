@@ -1,4 +1,4 @@
-export default [
+const orders = [
   {
     date: "2005-05-05",
     subtotal: 90.22,
@@ -14,3 +14,9 @@ export default [
     ],
   },
 ];
+
+const getAllOrders = () => {
+  return orders;
+};
+
+module.exports = { getAllOrders };

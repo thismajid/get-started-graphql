@@ -1,29 +1,22 @@
-import express from "express";
-import path from "path";
-import { graphqlHTTP } from "express-graphql";
-import { loadFilesSync } from "@graphql-tools/load-files";
-import { makeExecutableSchema } from "@graphql-tools/schema";
+const express = require("express");
+const path = require("path");
+const { graphqlHTTP } = require("express-graphql");
+const { loadFilesSync } = require("@graphql-tools/load-files");
+const { makeExecutableSchema } = require("@graphql-tools/schema");
 
-import productsModel from "./products/products.model.js";
-import ordersModel from "./orders/orders.model.js";
-
-const typesArray = loadFilesSync(path.join(".", "**/*.graphql"));
+const typesArray = loadFilesSync(path.join(__dirname, "**/*.graphql"));
+const resolversArray = loadFilesSync(path.join(__dirname, "**/*.resolvers.js"));
 
 const schema = makeExecutableSchema({
   typeDefs: typesArray,
+  resolvers: resolversArray,
 });
-
-const root = {
-  products: productsModel,
-  orders: ordersModel,
-};
 
 const app = express();
 app.use(
   "/graphql",
   graphqlHTTP({
     schema,
-    rootValue: root,
   })
 );
 
